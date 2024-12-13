@@ -297,7 +297,7 @@ do
                                     Visible = false,
 						Transparency = 0.5,
 						Filled = true,
-						Position = tab.drawings.base.Position + vector2_new(menuwidth + 10, tab.options.amount*15),
+						Position = tab.drawings.base.Position + vector2_new(menuwidth + 5, (tab.options.amount - 1)*15),
 						Size = vector2_new(menuwidth, 15),
 					}, {library.alldrawings})
 					button.drawings.text = createDrawing('Text', {
