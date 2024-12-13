@@ -586,7 +586,7 @@ do
                         --functions 
 				do
                               dropdown.setValue = function(value)
-                                    dropdown.drawings.text.Text = {dropdown.text}: {value};
+                                    dropdown.drawings.text.Text = {dropdown.text} : {value};
                                     dropdown.value = value;
                                     dropdown.flag.value = value;
                                     dropdown.flag.Changed(value);
