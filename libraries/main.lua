@@ -203,7 +203,7 @@ do
 				Color = color3_fromrgb(0, 0, 0),
 				Transparency = 0.5,
 				Filled = true,
-				Position = vector2_new(0, 40 + (library.tabinfo.amount * 15)),
+				Position = vector2_new(5, 40 + (library.tabinfo.amount * 15)),
 				Size = vector2_new(menuwidth, 15),
 			}, {library.alldrawings})
 			tab.drawings.text = createDrawing('Text', {
