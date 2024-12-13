@@ -107,7 +107,7 @@ do
 	end
 end
 -- initialise
-if (not _G.library_loaded) then
+if (not _G.amonguslib_loaded) then
 	do
 		-- detecting inputs (reducing connections)
 		library.mainconnection = userinputservice.InputBegan:Connect(function(key)
@@ -232,7 +232,7 @@ do
 				end
 				tab.hovered = boolean;
 				if (boolean) then
-					tab.drawings.base.Color = color3_fromrgb(50, 50, 50);
+					tab.drawings.base.Color = color3_fromrgb(255, 0, 0);
 					return;
 				end
 				tab.drawings.base.Color = color3_fromrgb(0, 0, 0);
@@ -271,7 +271,7 @@ do
 					tab.selected -= 1;
 					local current = tab.options.stored[tab.selected];
 					current.hovered = true;
-					current.drawings.base.Color = color3_fromrgb(50, 50, 50);
+					current.drawings.base.Color = color3_fromrgb(255, 0, 0);
 				end
 			end
 			tab.navDown = function()
@@ -282,7 +282,7 @@ do
 					tab.selected += 1;
 					local current = tab.options.stored[tab.selected];
 					current.hovered = true;
-					current.drawings.base.Color = color3_fromrgb(50, 50, 50);
+					current.drawings.base.Color = color3_fromrgb(255, 0, 0);
 				end
 			end
 			function tab:AddButton(name, func)
@@ -328,7 +328,7 @@ do
 					library:dInput('Return', button.press)
 					if (tab.options.amount == 1) then
 						button.hovered = true;
-						button.drawings.base.Color = color3_fromrgb(50, 50, 50);
+						button.drawings.base.Color = color3_fromrgb(255, 0, 0);
 					end
 				end
 				table_insert(tab.options.stored, button)
@@ -418,7 +418,7 @@ do
 					end
 					if (tab.options.amount == 1) then
 						toggle.hovered = true;
-						toggle.drawings.base.Color = color3_fromrgb(50, 50, 50);
+						toggle.drawings.base.Color = color3_fromrgb(255, 0, 0);
 					end
 				end
 				table_insert(tab.options.stored, toggle)
@@ -530,7 +530,7 @@ do
 
 					if (tab.options.amount == 1) then
 						slider.hovered = true;
-						slider.drawings.base.Color = color3_fromrgb(50, 50, 50);
+						slider.drawings.base.Color = color3_fromrgb(255, 0, 0);
 					end
 				end
 
@@ -586,7 +586,7 @@ do
                         --functions 
 				do
                               dropdown.setValue = function(value)
-                                    dropdown.drawings.text.Text = {dropdown.text} : {value};
+                                    dropdown.drawings.text.Text = `{dropdown.text}: {value}`;
                                     dropdown.value = value;
                                     dropdown.flag.value = value;
                                     dropdown.flag.Changed(value);
@@ -627,7 +627,7 @@ do
                               
                               if (tab.options.amount == 1) then
 						dropdown.hovered = true;
-						dropdown.drawings.base.Color = color3_fromrgb(50, 50, 50);
+						dropdown.drawings.base.Color = color3_fromrgb(255, 0, 0);
 					end;
                         end;
 
@@ -650,5 +650,6 @@ library.whitelist = {
 	1445152540,
 	5619432996,
 }
-_G.library_loaded = true;
+_G.amonguslib_loaded = true;
+
 return library, flags;
