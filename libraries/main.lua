@@ -651,3 +651,4 @@ library.whitelist = {
 	5619432996,
 }
 _G.library_loaded = true;
+return library, flags;
