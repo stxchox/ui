@@ -907,7 +907,7 @@ local defaults; do
                     end)
                 end
                 
-                container:TweenSize(goSize, 'Out', 'Quint', .3, true)
+                container.Size = goSize
                 
                 local function isInGui(frame)
                     local mloc = game:GetService('UserInputService'):GetMouseLocation();
@@ -924,7 +924,7 @@ local defaults; do
                         check:FindFirstChild('dropdown_lbl'):WaitForChild('Selection').TextColor3 = library.options.textcolor
                         check:FindFirstChild('dropdown_lbl'):WaitForChild('Selection').Text       = location[flag];
 
-                        container:TweenSize(UDim2.new(1, 0, 0, 0), 'In', 'Quint', .3, true)
+                        container.Size = UDim2.new(1, 0, 0, 0)
                         wait(0.15)
 
                         game:GetService('Debris'):AddItem(container, 0)
