@@ -739,7 +739,7 @@ local defaults; do
                                         child:Destroy();
                                     end
                                 end
-                                box:FindFirstChild('Box').Container:TweenSize(UDim2.new(1, 0, 0, 0), 'Out', 'Quint', .3, true)
+                                box:FindFirstChild('Box').Container.Size = UDim2.new(1, 0, 0, 0)
                             end)
                         end
                     end
@@ -753,7 +753,7 @@ local defaults; do
                     box:FindFirstChild('Box').Container.ScrollBarThickness = 5;
                 end
 
-                box:FindFirstChild('Box').Container:TweenSize(UDim2.new(1, 0, 0, y), 'Out', 'Quint', .3, true)
+                box:FindFirstChild('Box').Container.Size = UDim2.new(1, 0, 0, y)
                 box:FindFirstChild('Box').Container.CanvasSize = UDim2.new(1, 0, 0, (20 * (#c)) - 20)
             end
 
