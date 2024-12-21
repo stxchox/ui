@@ -6,37 +6,39 @@ local defaults; do
         local mouse        = game:GetService("Players").LocalPlayer:GetMouse();
         local inputService = game:GetService('UserInputService');
         local heartbeat    = game:GetService("RunService").Heartbeat;
-        -- // credits to Ririchi / Inori for this cute drag function :)
+
+        -- // credits to stxchox for rewriting this dragger entirely :)
+        
         function dragger.new(frame)
-            local s, event = pcall(function()
-                return frame.MouseEnter
+            frame.Active = true;
+            local dragging = false;
+            local mouse_start, frame_start;
+    
+            frame.InputBegan:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    dragging = true;
+                    mouse_start = inputService:GetMouseLocation();
+                    frame_start = frame.Position;
+                end
             end)
     
-            if s then
-                frame.Active = true;
-                
-                event:connect(function()
-                    local input = frame.InputBegan:connect(function(key)
-                        if key.UserInputType == Enum.UserInputType.MouseButton1 then
-                            local center = Vector2.new(frame.AbsoluteSize.X / 2, frame.AbsoluteSize.Y / 2);
-                            while heartbeat:wait() and inputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
-                                pcall(function()
-                                    frame.Position = UDim2.new(
-                                        0, mouse.X - center.X, 
-                                        0, mouse.Y - center.Y
-                                    )
-                                end)
-                            end
-                        end
-                    end)
+            frame.InputEnded:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    dragging = false;
+                end
+            end)
     
-                    local leave;
-                    leave = frame.MouseLeave:connect(function()
-                        input:disconnect();
-                        leave:disconnect();
-                    end)
-                end)
-            end
+            inputService.InputChanged:Connect(function(input)
+                if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+                    local mouse_current = inputService:GetMouseLocation();
+                    local delta = mouse_current - mouse_start;
+    
+                    frame.Position = UDim2.new(
+                        frame_start.X.Scale, frame_start.X.Offset + delta.X,
+                        frame_start.Y.Scale, frame_start.Y.Offset + delta.Y
+                    );
+                end
+            end)
         end
 
         game:GetService('UserInputService').InputBegan:connect(function(key, gpe)
