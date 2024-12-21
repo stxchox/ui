@@ -47,7 +47,7 @@ local defaults; do
                 if key.KeyCode == Enum.KeyCode.RightControl then
                     library.toggled = not library.toggled;
                     for i, data in next, library.queue do
-                        data.w.Visible = (library.toggled and true or false)
+                        data.window.Visible = (library.toggled and true or false)
                         wait();
                     end
                 end
@@ -129,8 +129,8 @@ local defaults; do
             }, types)
 
             table.insert(library.queue, {
-                w = window.object;
-                p = window.object.Position;
+                window = window.object;
+                position = window.object.Position;
             })
 
             local window_toggle = newWindow:FindFirstChild("window_toggle");
@@ -335,10 +335,10 @@ local defaults; do
                 if type == "number" then
                     local num = tonumber(box.Text)
                     if (not num) then
-                        box.Text = tonumber(location[flag])
+                        box.Text = tonumber(location[flag]) or default
                     else
                         location[flag] = math.clamp(num, min, max)
-                        box.Text = tonumber(location[flag])
+                        box.Text = tonumber(location[flag]) or default
                     end
                 else
                     location[flag] = tostring(box.Text)
@@ -1058,4 +1058,71 @@ local defaults; do
     end)
 end
 
-return library
+-- return library
+
+local w = library:CreateWindow('Example')
+w:Section('Top')
+local t = w:Toggle('Example Toggle', {flag = "toggle1"})
+local b = w:Button("Example Button", function()
+   print(w.flags.toggle1)
+end)
+w:Section('Middle')
+local old = workspace.CurrentCamera.FieldOfView
+local s = w:Slider("FOV", {
+   min = math.floor(workspace.CurrentCamera.FieldOfView);
+   max = 120;
+   flag = 'fov'
+}, function(v)
+   workspace.CurrentCamera.FieldOfView = v;
+end)
+local b2 = w:Button('Reset FOV', function()
+   s:Set(old)
+end)
+w:Section('Bottom')
+
+local box = w:Box('WalkSpeed', {
+   flag = "ws";
+   type = 'number';
+}, function(new, old, enter)
+   print(new, old, enter)
+   game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = tonumber(new)
+end)
+
+w:SearchBox("gamers", {
+   location = shared;
+   flag = "memes";
+   list = {
+       "kiriot";
+       "magikmanz";
+       "gamer vision";
+       "ironbrew";
+       "wally";
+       "firefox";
+       "this is epic";
+   }
+}, warn)
+
+w:Dropdown("locations", {
+   location = _G;
+   flag = "memes";
+   list = {
+       "jewelryin";
+       "jewelryout";
+       'bank';
+       'gas';
+       'prison';
+       'crimbase1';
+       'crimbase2';
+   }
+}, function(new)
+   warn(new)
+   print(_G.memes)
+end)
+
+w:Bind("Kill Player", {
+   flag = "killbind";
+   kbonly = true;
+   default = Enum.KeyCode.RightAlt;
+}, function()
+   game.Players.LocalPlayer.Character:BreakJoints()
+end)
