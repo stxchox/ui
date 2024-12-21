@@ -1,4 +1,4 @@
--- forked by SharKK | SharKK#1954
+-- modded wally library with some additional bugfixes and improvements, by stx.
 
 local library = {count = 0, queue = {}, callbacks = {}, rainbowtable = {}, toggled = true, binds = {}};
 local defaults; do
@@ -18,10 +18,13 @@ local defaults; do
                 event:connect(function()
                     local input = frame.InputBegan:connect(function(key)
                         if key.UserInputType == Enum.UserInputType.MouseButton1 then
-                            local objectPosition = Vector2.new(mouse.X - frame.AbsolutePosition.X, mouse.Y - frame.AbsolutePosition.Y);
+                            local center = Vector2.new(frame.AbsoluteSize.X / 2, frame.AbsoluteSize.Y / 2);
                             while heartbeat:wait() and inputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
                                 pcall(function()
-                                    frame.Position = UDim2.new(0, mouse.X - objectPosition.X, 0, mouse.Y - objectPosition.Y);
+                                    frame.Position = UDim2.new(
+                                        0, mouse.X - center.X, 
+                                        0, mouse.Y - center.Y
+                                    )
                                 end)
                             end
                         end
