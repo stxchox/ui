@@ -133,9 +133,11 @@ local defaults; do
                 p = window.object.Position;
             })
 
-            newWindow:FindFirstChild("window_toggle").MouseButton1Click:connect(function()
+            local window_toggle = newWindow:FindFirstChild("window_toggle");
+
+            window_toggle.MouseButton1Click:connect(function()
                 window.toggled = not window.toggled;
-                newWindow:FindFirstChild("window_toggle").Text = (window.toggled and "+" or "-")
+                window_toggle.Text = (window.toggled and "+" or "-")
                 if (not window.toggled) then
                     window.container.ClipsDescendants = true;
                 end
@@ -148,9 +150,8 @@ local defaults; do
                 end 
 
                 local targetSize = window.toggled and UDim2.new(1, 0, 0, y+5) or UDim2.new(1, 0, 0, 0);
-                local targetDirection = window.toggled and "In" or "Out"
 
-                window.container:TweenSize(targetSize, targetDirection, "Quint", .3, true)
+                window.container.Size = targetSize;
                 wait(.3)
                 if window.toggled then
                     window.container.ClipsDescendants = false;
