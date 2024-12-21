@@ -70,7 +70,7 @@ local defaults; do
                 library:Create('TextLabel', {
                     Text = name;
                     Size = UDim2.new(1, -10, 1, 0);
-                    Position = UDim2.new(0, 5, 0, 0);
+                    Position = UDim2.new(0, 5, 0, -2.5);
                     BackgroundTransparency = 1;
                     Font = Enum.Font.Code;
                     TextSize = options.titlesize;
@@ -82,7 +82,7 @@ local defaults; do
                 });
                 library:Create("TextButton", {
                     Size = UDim2.new(0, 30, 0, 30);
-                    Position = UDim2.new(1, -35, 0, 0);
+                    Position = UDim2.new(1, -35, 0, -2.5);
                     BackgroundTransparency = 1;
                     Text = "-";
                     TextSize = options.titlesize;
