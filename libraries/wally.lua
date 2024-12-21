@@ -5,10 +5,11 @@ local defaults; do
     local dragger = {}; do
         local mouse        = game:GetService("Players").LocalPlayer:GetMouse();
         local inputService = game:GetService('UserInputService');
+        local tweenService = game:GetService('TweenService');
         local heartbeat    = game:GetService("RunService").Heartbeat;
 
         -- // credits to stxchox for rewriting this dragger entirely :)
-        
+
         function dragger.new(frame)
             frame.Active = true;
             local dragging = false;
@@ -32,11 +33,13 @@ local defaults; do
                 if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
                     local mouse_current = inputService:GetMouseLocation();
                     local delta = mouse_current - mouse_start;
-    
-                    frame.Position = UDim2.new(
-                        frame_start.X.Scale, frame_start.X.Offset + delta.X,
-                        frame_start.Y.Scale, frame_start.Y.Offset + delta.Y
-                    );
+
+                    tweenService:Create(frame, TweenInfo.new(0.1), {
+                        Position = UDim2.new(
+                            frame_start.X.Scale, frame_start.X.Offset + delta.X,
+                            frame_start.Y.Scale, frame_start.Y.Offset + delta.Y
+                        )
+                    }):Play();
                 end
             end)
         end
