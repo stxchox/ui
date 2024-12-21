@@ -34,12 +34,10 @@ local defaults; do
                     local mouse_current = inputService:GetMouseLocation();
                     local delta = mouse_current - mouse_start;
 
-                    tweenService:Create(frame, TweenInfo.new(0.1), {
-                        Position = UDim2.new(
-                            frame_start.X.Scale, frame_start.X.Offset + delta.X,
-                            frame_start.Y.Scale, frame_start.Y.Offset + delta.Y
-                        )
-                    }):Play();
+		    frame.Position = UDim2.new(
+                        frame_start.X.Scale, frame_start.X.Offset + delta.X,
+                        frame_start.Y.Scale, frame_start.Y.Offset + delta.Y
+                    )
                 end
             end)
         end
