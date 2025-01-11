@@ -43,12 +43,11 @@ local defaults; do
         end
 
         game:GetService('UserInputService').InputBegan:connect(function(key, gpe)
-            if (not gpe) then
+            if not gpe then
                 if key.KeyCode == Enum.KeyCode.RightControl then
-                    library.toggled = not library.toggled;
-                    for i, data in next, library.queue do
-                        data.window.Visible = (library.toggled and true or false)
-                        wait();
+                    library.toggled = not library.toggled
+                    for _, data in pairs(library.queue) do
+                        data.window.Visible = library.toggled
                     end
                 end
             end
