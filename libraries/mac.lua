@@ -1339,7 +1339,7 @@ function MacLib:Window(Settings)
 		return GlobalSettingFunctions
 	end
 
-	function WindowFunctions:TabGroup()
+	function WindowFunctions:Group()
 		local SectionFunctions = {}
 
 		local tabGroup = Instance.new("Frame")
@@ -5666,7 +5666,7 @@ function MacLib:Demo()
 	}
 
 	local tabGroups = {
-		TabGroup1 = Window:TabGroup()
+		TabGroup1 = Window:Group()
 	}
 
 	local tabs = {
